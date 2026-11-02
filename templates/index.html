@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPCO Smart Virtual Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+
+<div class="app-shell">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">D</div>
+            <div>
+                <h2>DPCO <span>LAB</span></h2>
+                <small>SMART VIRTUAL LAB</small>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav class="navigation">
+            <button class="nav-link active" data-page="dashboard">▦ <span>Dashboard</span></button>
+            <button class="nav-link" data-page="logic">◈ <span>Digital Logic</span></button>
+            <button class="nav-link" data-page="adder">⊞ <span>Adder Circuits</span></button>
+            <button class="nav-link" data-page="binary">01 <span>Binary Playground</span></button>
+            <button class="nav-link" data-page="alu">⌘ <span>ALU Studio</span></button>
+            <button class="nav-link" data-page="memory">▤ <span>Memory Lab</span></button>
+            <button class="nav-link" data-page="cache">▥ <span>Cache Simulator</span></button>
+            <button class="nav-link" data-page="cpu">▣ <span>CPU Explorer</span><em>NEW</em></button>
+        </nav>
+
+        <div class="nav-label">LEARNING</div>
+
+        <nav class="navigation">
+            <button class="nav-link" data-page="quiz">✎ <span>Knowledge Quiz</span></button>
+            <button class="nav-link" data-page="progress">◴ <span>My Progress</span></button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile-mini">
+                <div class="avatar" id="sidebarAvatar">S</div>
+                <div class="profile-info">
+                    <strong id="sidebarName">Guest Student</strong>
+                    <small id="sidebarStatus">Not signed in</small>
+                </div>
+            </div>
+            <button class="nav-link" id="accountButton">♙ <span>Sign In / Register</span></button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <div class="breadcrumb">DPCO / <span id="breadcrumbPage">Dashboard</span></div>
+                <h1 id="pageHeading">Dashboard</h1>
+            </div>
+            <div class="top-actions">
+                <span class="status-dot"></span>
+                <span class="system-status">SYSTEM ONLINE</span>
+                <button class="top-avatar" id="topAccountButton">S</button>
+            </div>
+        </header>
+
+        <div class="content-area">
+
+            <!-- DASHBOARD -->
+            <section class="page active" id="page-dashboard">
+
+                <div class="welcome-banner">
+                    <div>
+                        <span class="eyebrow">WELCOME TO YOUR DIGITAL LAB</span>
+                        <h2>Explore. Experiment. <span>Engineer.</span></h2>
+                        <p>Learn digital principles through interactive simulations and hands-on experiments.</p>
+                        <button class="primary-button" data-open="logic">Start Experiment →</button>
+                    </div>
+                    <div class="welcome-art">
+                        <div class="circuit-circle">01<br><span>10</span></div>
+                        <div class="orbit orbit-one"></div>
+                        <div class="orbit orbit-two"></div>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Learning Overview</h2>
+                        <p>Your virtual laboratory at a glance</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-icon cyan">▦</span>
+                        <p>LAB MODULES</p>
+                        <h3>08</h3>
+                        <small>Interactive modules</small>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon violet">✓</span>
+                        <p>COMPLETED</p>
+                        <h3 id="completedCount">0</h3>
+                        <small>Modules visited</small>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon blue">⌁</span>
+                        <p>YOUR PROGRESS</p>
+                        <h3 id="progressPercent">0%</h3>
+                        <small>Learning progress</small>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon orange">⚡</span>
+                        <p>ACCOUNT</p>
+                        <h3 id="accountState">Guest</h3>
+                        <small id="accountHint">Sign in to save progress</small>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Explore Lab Modules</h2>
+                        <p>Choose a module to start learning</p>
+                    </div>
+                </div>
+
+                <div class="module-grid">
+                    <button class="module-card" data-open="logic">
+                        <span class="module-icon cyan">◈</span>
+                        <span class="module-tag">FUNDAMENTALS</span>
+                        <h3>Digital Logic</h3>
+                        <p>Explore AND, OR, NOT, NAND, NOR and XOR gates.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="adder">
+                        <span class="module-icon violet">⊞</span>
+                        <span class="module-tag">CIRCUITS</span>
+                        <h3>Adder Circuits</h3>
+                        <p>Understand half adders and full adders.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="binary">
+                        <span class="module-icon blue">01</span>
+                        <span class="module-tag">NUMBER SYSTEMS</span>
+                        <h3>Binary Playground</h3>
+                        <p>Convert decimal, binary, hexadecimal and octal.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="alu">
+                        <span class="module-icon orange">⌘</span>
+                        <span class="module-tag">PROCESSING</span>
+                        <h3>ALU Studio</h3>
+                        <p>Experiment with arithmetic and logic operations.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="memory">
+                        <span class="module-icon cyan">▤</span>
+                        <span class="module-tag">STORAGE</span>
+                        <h3>Memory Lab</h3>
+                        <p>Read and write values at memory addresses.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="cache">
+                        <span class="module-icon violet">▥</span>
+                        <span class="module-tag">PERFORMANCE</span>
+                        <h3>Cache Simulator</h3>
+                        <p>Understand cache hits, misses and mapping.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="cpu">
+                        <span class="module-icon blue">▣</span>
+                        <span class="module-tag">ARCHITECTURE</span>
+                        <h3>CPU Explorer</h3>
+                        <p>Execute instructions and inspect registers.</p>
+                        <span class="module-link">Open Lab →</span>
+                    </button>
+
+                    <button class="module-card" data-open="quiz">
+                        <span class="module-icon orange">✎</span>
+                        <span class="module-tag">ASSESSMENT</span>
+                        <h3>Knowledge Quiz</h3>
+                        <p>Test your knowledge with interactive quizzes.</p>
+                        <span class="module-link">Open Quiz →</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- DIGITAL LOGIC -->
+            <section class="page" id="page-logic">
+                <div class="section-heading">
+                    <div>
+                        <h2>Digital Logic Simulator</h2>
+                        <p>Experiment with basic logic gates and observe their outputs.</p>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="panel">
+                        <h3>Gate Configuration</h3>
+                        <label>Choose Logic Gate</label>
+                        <select id="logicGate">
+                            <option>AND</option>
+                            <option>OR</option>
+                            <option>NOT</option>
+                            <option>NAND</option>
+                            <option>NOR</option>
+                            <option>XOR</option>
+                            <option>XNOR</option>
+                        </select>
+
+                        <label>Input A</label>
+                        <select id="logicA">
+                            <option value="0">0 (LOW)</option>
+                            <option value="1">1 (HIGH)</option>
+                        </select>
+
+                        <div id="logicBGroup">
+                            <label>Input B</label>
+                            <select id="logicB">
+                                <option value="0">0 (LOW)</option>
+                                <option value="1">1 (HIGH)</option>
+                            </select>
+                        </div>
+
+                        <button class="primary-button full-button" id="runLogic">Run Simulation →</button>
+                    </div>
+
+                    <div class="panel result-panel">
+                        <h3>Simulation Output</h3>
+                        <div class="gate-visual" id="gateVisual">AND</div>
+                        <div class="result-value" id="logicOutput">—</div>
+                        <p class="muted">OUTPUT SIGNAL</p>
+                        <div id="logicMessage" class="result-message">Configure your inputs and run the simulation.</div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Truth Table</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead id="logicTableHead"></thead>
+                            <tbody id="logicTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADDER -->
+            <section class="page" id="page-adder">
+                <div class="section-heading">
+                    <div>
+                        <h2>Adder Circuits</h2>
+                        <p>Understand binary addition using half and full adders.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="form-grid">
+                        <div>
+                            <label>Adder Type</label>
+                            <select id="adderType">
+                                <option value="half">Half Adder</option>
+                                <option value="full">Full Adder</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Input A</label>
+                            <select id="adderA">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Input B</label>
+                            <select id="adderB">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="primary-button" id="runAdder">Calculate Addition →</button>
+                </div>
+
+                <div class="stats-grid result-stats">
+                    <div class="stat-card">
+                        <p>SUM</p>
+                        <h3 id="adderSum">—</h3>
+                    </div>
+                    <div class="stat-card">
+                        <p>CARRY</p>
+                        <h3 id="adderCarry">—</h3>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>How it works</h3>
+                    <p class="muted">A half adder adds two binary inputs. A full adder also accepts a carry-in input. This demonstration uses carry-in = 0.</p>
+                </div>
+            </section>
+
+            <!-- BINARY -->
+            <section class="page" id="page-binary">
+                <div class="section-heading">
+                    <div>
+                        <h2>Binary Playground</h2>
+                        <p>Convert numbers between different number systems.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <label>Enter Decimal Number</label>
+                    <input type="number" id="binaryNumber" value="25">
+                    <label>Bit Width</label>
+                    <select id="binaryBits">
+                        <option>8</option>
+                        <option>16</option>
+                        <option>32</option>
+                    </select>
+                    <button class="primary-button" id="convertBinary">Convert Number →</button>
+                </div>
+
+                <div class="conversion-grid">
+                    <div class="conversion-card">
+                        <span>01</span>
+                        <p>BINARY</p>
+                        <h2 id="binaryResult">—</h2>
+                    </div>
+                    <div class="conversion-card">
+                        <span>10</span>
+                        <p>DECIMAL</p>
+                        <h2 id="decimalResult">—</h2>
+                    </div>
+                    <div class="conversion-card">
+                        <span>0x</span>
+                        <p>HEXADECIMAL</p>
+                        <h2 id="hexResult">—</h2>
+                    </div>
+                    <div class="conversion-card">
+                        <span>07</span>
+                        <p>OCTAL</p>
+                        <h2 id="octalResult">—</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ALU -->
+            <section class="page" id="page-alu">
+                <div class="section-heading">
+                    <div>
+                        <h2>ALU Studio</h2>
+                        <p>Perform arithmetic and logical operations.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="form-grid">
+                        <div>
+                            <label>Operand A</label>
+                            <input type="number" id="aluA" value="12">
+                        </div>
+                        <div>
+                            <label>Operation</label>
+                            <select id="aluOperation">
+                                <option>ADD</option>
+                                <option>SUB</option>
+                                <option>AND</option>
+                                <option>OR</option>
+                                <option>XOR</option>
+                                <option>NOT</option>
+                                <option>SHL</option>
+                                <option>SHR</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Operand B</label>
+                            <input type="number" id="aluB" value="5">
+                        </div>
+                    </div>
+                    <label>Bit Width</label>
+                    <select id="aluBits">
+                        <option>8</option>
+                        <option>16</option>
+                        <option>32</option>
+                    </select>
+                    <button class="primary-button" id="runAlu">Execute ALU →</button>
+                </div>
+
+                <div class="panel">
+                    <h3>ALU Result</h3>
+                    <div class="result-value" id="aluResult">—</div>
+                    <p class="muted">BINARY RESULT</p>
+                    <div class="flag-grid">
+                        <div class="flag">ZERO <strong id="flagZero">—</strong></div>
+                        <div class="flag">NEGATIVE <strong id="flagNegative">—</strong></div>
+                        <div class="flag">CARRY <strong id="flagCarry">—</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEMORY -->
+            <section class="page" id="page-memory">
+                <div class="section-heading">
+                    <div>
+                        <h2>Memory Lab</h2>
+                        <p>Explore memory addresses and read or write values.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="form-grid">
+                        <div>
+                            <label>Memory Address (0–15)</label>
+                            <input type="number" id="memoryAddress" min="0" max="15" value="0">
+                        </div>
+                        <div>
+                            <label>Data Value</label>
+                            <input type="number" id="memoryValue" min="0" value="42">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <button class="primary-button" id="memoryRead">Read Memory</button>
+                        <button class="secondary-button" id="memoryWrite">Write Memory</button>
+                    </div>
+                    <p id="memoryMessage" class="result-message"></p>
+                </div>
+
+                <div class="panel">
+                    <h3>Memory Address Map</h3>
+                    <div class="memory-grid" id="memoryGrid"></div>
+                </div>
+            </section>
+
+            <!-- CACHE -->
+            <section class="page" id="page-cache">
+                <div class="section-heading">
+                    <div>
+                        <h2>Cache Simulator</h2>
+                        <p>Observe cache hits, misses and cache line mapping.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <label>Memory Address</label>
+                    <input type="number" id="cacheAddress" min="0" value="5">
+                    <label>Operation</label>
+                    <select id="cacheOperation">
+                        <option>READ</option>
+                        <option>WRITE</option>
+                    </select>
+                    <label>Value (for WRITE)</label>
+                    <input type="number" id="cacheValue" value="25">
+                    <button class="primary-button" id="runCache">Access Cache →</button>
+                    <p id="cacheMessage" class="result-message"></p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card"><p>HITS</p><h3 id="cacheHits">0</h3></div>
+                    <div class="stat-card"><p>MISSES</p><h3 id="cacheMisses">0</h3></div>
+                    <div class="stat-card"><p>HIT RATE</p><h3 id="cacheRate">0%</h3></div>
+                </div>
+
+                <div class="panel">
+                    <h3>Cache Lines</h3>
+                    <div id="cacheLines" class="cache-grid"></div>
+                </div>
+            </section>
+
+            <!-- CPU -->
+            <section class="page" id="page-cpu">
+                <div class="section-heading">
+                    <div>
+                        <h2>CPU Explorer</h2>
+                        <p>Write assembly-like instructions and execute them.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <label>CPU Program</label>
+                    <textarea id="cpuProgram" rows="7">LOAD R0 10
+LOAD R1 5
+ADD R0
+ADD R1
+STORE R2
+HALT</textarea>
+                    <p class="muted">Supported: LOAD, ADD, SUB, STORE, MOV, INC, HALT. Example: LOAD R0 10</p>
+                    <button class="primary-button" id="runCpu">Execute Program →</button>
+                </div>
+
+                <div class="panel">
+                    <h3>CPU Registers</h3>
+                    <div class="register-grid">
+                        <div class="register"><span>R0</span><strong id="regR0">0</strong></div>
+                        <div class="register"><span>R1</span><strong id="regR1">0</strong></div>
+                        <div class="register"><span>R2</span><strong id="regR2">0</strong></div>
+                        <div class="register"><span>R3</span><strong id="regR3">0</strong></div>
+                        <div class="register"><span>ACC</span><strong id="regACC">0</strong></div>
+                        <div class="register"><span>PC</span><strong id="regPC">0</strong></div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Execution Log</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>PC</th><th>Instruction</th><th>Accumulator</th></tr></thead>
+                            <tbody id="cpuLog"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUIZ -->
+            <section class="page" id="page-quiz">
+                <div class="section-heading">
+                    <div>
+                        <h2>Knowledge Quiz</h2>
+                        <p>Test your understanding of computer organization.</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <label>Choose Quiz Topic</label>
+                    <select id="quizTopic">
+                        <option>Digital Logic</option>
+                        <option>Number Systems</option>
+                        <option>Computer Organization</option>
+                    </select>
+                    <button class="primary-button" id="loadQuiz">Load Quiz →</button>
+                </div>
+
+                <div id="quizQuestions" class="quiz-list"></div>
+                <button class="primary-button" id="submitQuiz" hidden>Submit Answers →</button>
+                <div id="quizResult" class="panel" hidden></div>
+            </section>
+
+            <!-- PROGRESS -->
+            <section class="page" id="page-progress">
+                <div class="section-heading">
+                    <div>
+                        <h2>My Learning Progress</h2>
+                        <p>Track the modules you have visited.</p>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Module Completion</h3>
+                    <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+                    <h2 id="progressLabel">0% Completed</h2>
+                    <div id="progressList" class="progress-list"></div>
+                </div>
+            </section>
+
+            <!-- ACCOUNT -->
+            <section class="page" id="page-account">
+                <div class="section-heading">
+                    <div>
+                        <h2>Student Account</h2>
+                        <p>Create an account or sign in to save your learning progress.</p>
+                    </div>
+                </div>
+
+                <div class="account-panel panel">
+                    <div class="account-tabs">
+                        <button class="account-tab active" data-account="login">Sign In</button>
+                        <button class="account-tab" data-account="register">Register</button>
+                    </div>
+
+                    <form id="loginForm">
+                        <h3>Welcome Back</h3>
+                        <label>Email Address</label>
+                        <input type="email" id="loginEmail" required>
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" required>
+                        <button class="primary-button full-button" type="submit">Sign In →</button>
+                    </form>
+
+                    <form id="registerForm" hidden>
+                        <h3>Create Student Account</h3>
+                        <label>Full Name</label>
+                        <input type="text" id="registerName" minlength="2" required>
+                        <label>Email Address</label>
+                        <input type="email" id="registerEmail" required>
+                        <label>Password (minimum 8 characters)</label>
+                        <input type="password" id="registerPassword" minlength="8" required>
+                        <button class="primary-button full-button" type="submit">Create Account →</button>
+                    </form>
+
+                    <p id="accountMessage" class="result-message"></p>
+                    <button class="secondary-button full-button" id="logoutButton" hidden>Sign Out</button>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="footer">
+            <span>DPCO SMART VIRTUAL LAB</span>
+            <span>LEARN • SIMULATE • EXPLORE</span>
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>
